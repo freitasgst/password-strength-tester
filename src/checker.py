@@ -35,8 +35,8 @@ def password_checker_result(fails: list[int]) -> list[str]:
 
 
 def password_wordlists_xors(password: str) -> tuple[bool, int] | bool:
-    with open('assets/worldlists/rockyou.txt') as file:
-        known_passwords = [leak.split() for leak in file]
+    # with open('assets/worldlists/rockyou.txt') as file:
+    #     known_passwords = [leak.split() for leak in file]
     pass
 
 
