@@ -362,3 +362,6 @@ class TestChecker(unittest.TestCase):
                 "* A senha está em listas públicas de senhas conhecidas",
             ],
         )
+        fails = []
+        result = password_checker_result(fails)
+        self.assertEqual(result, ["A senha é forte!"])
