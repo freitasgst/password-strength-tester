@@ -20,10 +20,10 @@ class TestChecker(unittest.TestCase):
         self.assertEqual(result, True)
         password = "12345678"
         result = password_minimum_length(password)
-        self.assertEqual(result, tuple[False, 0])
+        self.assertEqual(result, False)
         password = "1234"
         result = password_minimum_length(password)
-        self.assertEqual(result, tuple[False, 0])
+        self.assertEqual(result, False)
 
     def test_password_maximum_length(self):
         password = "1" * 64
@@ -34,10 +34,10 @@ class TestChecker(unittest.TestCase):
         self.assertEqual(result, True)
         password = "1" * 129
         result = password_maximum_length(password)
-        self.assertEqual(result, tuple[False, 1])
+        self.assertEqual(result, False)
         password = "1" * 500
         result = password_maximum_length(password)
-        self.assertEqual(result, tuple[False, 1])
+        self.assertEqual(result, False)
 
     def test_password_has_lower_char(self):
         # True
@@ -60,35 +60,35 @@ class TestChecker(unittest.TestCase):
         # False
         password = "!@#$#$ˆABCDEFGH"
         result = password_has_lower_char(password)
-        self.assertEqual(result, tuple[False, 2])
+        self.assertEqual(result, False)
 
         password = "ABCDEFGH"
         result = password_has_lower_char(password)
-        self.assertEqual(result, tuple[False, 2])
+        self.assertEqual(result, False)
 
         password = "12345678"
         result = password_has_lower_char(password)
-        self.assertEqual(result, tuple[False, 2])
+        self.assertEqual(result, False)
 
         password = "A1B2C3D4E5F6G7H8"
         result = password_has_lower_char(password)
-        self.assertEqual(result, tuple[False, 2])
+        self.assertEqual(result, False)
 
         password = "!@#$%ˆ&*()"
         result = password_has_lower_char(password)
-        self.assertEqual(result, tuple[False, 2])
+        self.assertEqual(result, False)
 
         password = "!A@S#V$%ˆ&*()"
         result = password_has_lower_char(password)
-        self.assertEqual(result, tuple[False, 2])
+        self.assertEqual(result, False)
 
         password = "1!2@456#$%ˆ&*()"
         result = password_has_lower_char(password)
-        self.assertEqual(result, tuple[False, 2])
+        self.assertEqual(result, False)
 
         password = "!@34534ANDBDJ#$%ˆ&*()"
         result = password_has_lower_char(password)
-        self.assertEqual(result, tuple[False, 2])
+        self.assertEqual(result, False)
 
     def test_password_has_upper_char(self):
         # True
@@ -111,35 +111,35 @@ class TestChecker(unittest.TestCase):
         # False
         password = "asddfghjklh"
         result = password_has_upper_char(password)
-        self.assertEqual(result, tuple[False, 3])
+        self.assertEqual(result, False)
 
         password = "1234abcdefgh"
         result = password_has_upper_char(password)
-        self.assertEqual(result, tuple[False, 3])
+        self.assertEqual(result, False)
 
         password = "12345678"
         result = password_has_upper_char(password)
-        self.assertEqual(result, tuple[False, 3])
+        self.assertEqual(result, False)
 
         password = "a1b2c3d4e5f6g7h8"
         result = password_has_upper_char(password)
-        self.assertEqual(result, tuple[False, 3])
+        self.assertEqual(result, False)
 
         password = "!@#$%ˆ&*()"
         result = password_has_upper_char(password)
-        self.assertEqual(result, tuple[False, 3])
+        self.assertEqual(result, False)
 
         password = "!a@s#v$%ˆ&*()"
         result = password_has_upper_char(password)
-        self.assertEqual(result, tuple[False, 3])
+        self.assertEqual(result, False)
 
         password = "1!2@456#$%ˆ&*()"
         result = password_has_upper_char(password)
-        self.assertEqual(result, tuple[False, 3])
+        self.assertEqual(result, False)
 
         password = "!@34534andbdj#$%ˆ&*()"
         result = password_has_upper_char(password)
-        self.assertEqual(result, tuple[False, 3])
+        self.assertEqual(result, False)
 
     def test_password_has_punct_char(self):
         # True
@@ -170,27 +170,27 @@ class TestChecker(unittest.TestCase):
         # False
         password = "asddfghjklh"
         result = password_has_punct_char(password)
-        self.assertEqual(result, tuple[False, 4])
+        self.assertEqual(result, False)
 
         password = "1234abcdefgh"
         result = password_has_punct_char(password)
-        self.assertEqual(result, tuple[False, 4])
+        self.assertEqual(result, False)
 
         password = "12345678"
         result = password_has_punct_char(password)
-        self.assertEqual(result, tuple[False, 4])
+        self.assertEqual(result, False)
 
         password = "a1b2c3d4e5f6g7h8"
         result = password_has_punct_char(password)
-        self.assertEqual(result, tuple[False, 4])
+        self.assertEqual(result, False)
 
         password = "ABCDEFGH"
         result = password_has_punct_char(password)
-        self.assertEqual(result, tuple[False, 4])
+        self.assertEqual(result, False)
 
         password = "FDHVJFHabcdefgh"
         result = password_has_punct_char(password)
-        self.assertEqual(result, tuple[False, 4])
+        self.assertEqual(result, False)
 
     def test_password_has_digit_char(self):
         # True
@@ -221,27 +221,27 @@ class TestChecker(unittest.TestCase):
         # False
         password = "asddfghjklh"
         result = password_has_digit_char(password)
-        self.assertEqual(result, tuple[False, 5])
+        self.assertEqual(result, False)
 
         password = "ABCDEFGH"
         result = password_has_digit_char(password)
-        self.assertEqual(result, tuple[False, 5])
+        self.assertEqual(result, False)
 
         password = "FDHVJFHabcdefgh"
         result = password_has_digit_char(password)
-        self.assertEqual(result, tuple[False, 5])
+        self.assertEqual(result, False)
 
         password = "!a@s#v$%ˆ&*()"
         result = password_has_digit_char(password)
-        self.assertEqual(result, tuple[False, 5])
+        self.assertEqual(result, False)
 
         password = "!@#$#$ˆABCDEFGH"
         result = password_has_digit_char(password)
-        self.assertEqual(result, tuple[False, 5])
+        self.assertEqual(result, False)
 
         password = "!@#$%ˆ&*()"
         result = password_has_digit_char(password)
-        self.assertEqual(result, tuple[False, 5])
+        self.assertEqual(result, False)
 
     def test_password_has_seq_series(self):
         password = "algnhots"
@@ -249,25 +249,25 @@ class TestChecker(unittest.TestCase):
         self.assertEqual(result, True)
         password = "12345678"
         result = password_has_seq_series(password)
-        self.assertEqual(result, tuple[False, 6])
+        self.assertEqual(result, False)
         password = "abcdefgh"
         result = password_has_seq_series(password)
-        self.assertEqual(result, tuple[False, 6])
+        self.assertEqual(result, False)
         password = "ABCDEFGH"
         result = password_has_seq_series(password)
-        self.assertEqual(result, tuple[False, 6])
+        self.assertEqual(result, False)
         password = "789ahexxumk"
         result = password_has_seq_series(password)
-        self.assertEqual(result, tuple[False, 6])
+        self.assertEqual(result, False)
         password = "ahexyzxxumk"
         result = password_has_seq_series(password)
-        self.assertEqual(result, tuple[False, 6])
+        self.assertEqual(result, False)
         password = "ahexxuFGHmk"
         result = password_has_seq_series(password)
-        self.assertEqual(result, tuple[False, 6])
+        self.assertEqual(result, False)
         password = "123abcABC"
         result = password_has_seq_series(password)
-        self.assertEqual(result, tuple[False, 6])
+        self.assertEqual(result, False)
 
     def test_password_has_rep_series(self):
         password = "algnhots"
@@ -275,25 +275,25 @@ class TestChecker(unittest.TestCase):
         self.assertEqual(result, True)
         password = "11111111"
         result = password_has_rep_series(password)
-        self.assertEqual(result, tuple[False, 7])
+        self.assertEqual(result, False)
         password = "aaaaaaaa"
         result = password_has_rep_series(password)
-        self.assertEqual(result, tuple[False, 7])
+        self.assertEqual(result, False)
         password = "GGGGGGGG"
         result = password_has_rep_series(password)
-        self.assertEqual(result, tuple[False, 7])
+        self.assertEqual(result, False)
         password = "555ahexxumk"
         result = password_has_rep_series(password)
-        self.assertEqual(result, tuple[False, 7])
+        self.assertEqual(result, False)
         password = "ahehhhxxumk"
         result = password_has_rep_series(password)
-        self.assertEqual(result, tuple[False, 7])
+        self.assertEqual(result, False)
         password = "ahexxuZZZmk"
         result = password_has_rep_series(password)
-        self.assertEqual(result, tuple[False, 7])
+        self.assertEqual(result, False)
         password = "111aaaBBB"
         result = password_has_rep_series(password)
-        self.assertEqual(result, tuple[False, 7])
+        self.assertEqual(result, False)
 
     def test_password_wordlists_xors(self):
         password = "YUpb/W@7:h;.x8m6-%[=jC"
@@ -313,47 +313,147 @@ class TestChecker(unittest.TestCase):
         self.assertEqual(result, True)
         password = "password123"
         result = password_wordlists_xors(password)
-        self.assertEqual(result, tuple[False, 8])
+        self.assertEqual(result, False)
         password = "iloveyou"
         result = password_wordlists_xors(password)
-        self.assertEqual(result, tuple[False, 8])
+        self.assertEqual(result, False)
 
     def test_password_checker_result(self):
-        fails = [0]
-        result = password_checker_result(fails)
+        params = {
+            "minimum_length": False,
+            "maximum_length": True,
+            "has_lower_char": True,
+            "has_upper_char": True,
+            "has_digit_char": True,
+            "has_punct_char": True,
+            "has_rep_series": True,
+            "has_seq_series": True,
+            "wordlists_xors": True
+        }
+        result = password_checker_result(params)
         self.assertEqual(result, ["* A senha precisa ter no mínimo 16 caracteres"])
-        fails = [1]
-        result = password_checker_result(fails)
+        params = {
+            "minimum_length": True,
+            "maximum_length": False,
+            "has_lower_char": True,
+            "has_upper_char": True,
+            "has_digit_char": True,
+            "has_punct_char": True,
+            "has_rep_series": True,
+            "has_seq_series": True,
+            "wordlists_xors": True
+        }
+        result = password_checker_result(params)
         self.assertEqual(result, ["* A senha precisa ter no máximo 128 caracteres"])
-        fails = [2]
-        result = password_checker_result(fails)
+        params = {
+            "minimum_length": True,
+            "maximum_length": True,
+            "has_lower_char": False,
+            "has_upper_char": True,
+            "has_digit_char": True,
+            "has_punct_char": True,
+            "has_rep_series": True,
+            "has_seq_series": True,
+            "wordlists_xors": True
+        }
+        result = password_checker_result(params)
         self.assertEqual(result, ["* A senha precisa ter letras minúsculas"])
-        fails = [3]
-        result = password_checker_result(fails)
+        params = {
+            "minimum_length": True,
+            "maximum_length": True,
+            "has_lower_char": True,
+            "has_upper_char": False,
+            "has_digit_char": True,
+            "has_punct_char": True,
+            "has_rep_series": True,
+            "has_seq_series": True,
+            "wordlists_xors": True
+        }
+        result = password_checker_result(params)
         self.assertEqual(result, ["* A senha precisa ter letras maiúsculas"])
-        fails = [4]
-        result = password_checker_result(fails)
+        params = {
+            "minimum_length": True,
+            "maximum_length": True,
+            "has_lower_char": True,
+            "has_upper_char": True,
+            "has_digit_char": True,
+            "has_punct_char": False,
+            "has_rep_series": True,
+            "has_seq_series": True,
+            "wordlists_xors": True
+        }
+        result = password_checker_result(params)
         self.assertEqual(result, ["* A senha precisa ter caracteres especiais"])
-        fails = [5]
-        result = password_checker_result(fails)
+        params = {
+            "minimum_length": True,
+            "maximum_length": True,
+            "has_lower_char": True,
+            "has_upper_char": True,
+            "has_digit_char": False,
+            "has_punct_char": True,
+            "has_rep_series": True,
+            "has_seq_series": True,
+            "wordlists_xors": True
+        }
+        result = password_checker_result(params)
         self.assertEqual(result, ["* A senha precisa ter números"])
-        fails = [6]
-        result = password_checker_result(fails)
+        params = {
+            "minimum_length": True,
+            "maximum_length": True,
+            "has_lower_char": True,
+            "has_upper_char": True,
+            "has_digit_char": True,
+            "has_punct_char": True,
+            "has_rep_series": True,
+            "has_seq_series": False,
+            "wordlists_xors": True
+        }
+        result = password_checker_result(params)
         self.assertEqual(
             result, ["* A senha não pode conter uma sequência de caracteres"]
         )
-        fails = [7]
-        result = password_checker_result(fails)
+        params = {
+            "minimum_length": True,
+            "maximum_length": True,
+            "has_lower_char": True,
+            "has_upper_char": True,
+            "has_digit_char": True,
+            "has_punct_char": True,
+            "has_rep_series": False,
+            "has_seq_series": True,
+            "wordlists_xors": True
+        }
+        result = password_checker_result(params)
         self.assertEqual(
             result, ["* A senha não pode ter repetições sequenciais de um caracter"]
         )
-        fails = [8]
-        result = password_checker_result(fails)
+        params = {
+            "minimum_length": True,
+            "maximum_length": True,
+            "has_lower_char": True,
+            "has_upper_char": True,
+            "has_digit_char": True,
+            "has_punct_char": True,
+            "has_rep_series": True,
+            "has_seq_series": True,
+            "wordlists_xors": False
+        }
+        result = password_checker_result(params)
         self.assertEqual(
             result, ["* A senha está em listas públicas de senhas conhecidas"]
         )
-        fails = [0, 5, 8]
-        result = password_checker_result(fails)
+        params = {
+            "minimum_length": False,
+            "maximum_length": True,
+            "has_lower_char": True,
+            "has_upper_char": True,
+            "has_digit_char": False,
+            "has_punct_char": True,
+            "has_rep_series": True,
+            "has_seq_series": True,
+            "wordlists_xors": False
+        }
+        result = password_checker_result(params)
         self.assertEqual(
             result,
             [
@@ -362,6 +462,16 @@ class TestChecker(unittest.TestCase):
                 "* A senha está em listas públicas de senhas conhecidas",
             ],
         )
-        fails = []
-        result = password_checker_result(fails)
+        params = {
+            "minimum_length": False,
+            "maximum_length": False,
+            "has_lower_char": False,
+            "has_upper_char": False,
+            "has_digit_char": False,
+            "has_punct_char": False,
+            "has_rep_series": False,
+            "has_seq_series": False,
+            "wordlists_xors": False
+        }
+        result = password_checker_result(params)
         self.assertEqual(result, ["A senha é forte!"])
