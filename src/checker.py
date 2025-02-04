@@ -2,7 +2,7 @@ import getpass
 
 
 def password_minimum_length(password: str) -> bool:
-    if len(password) < 16:
+    if len(password) < 12:
         return False
     return True
 
@@ -90,7 +90,7 @@ def password_wordlists_xors(password: str) -> bool:
 
 def password_checker_result(fails: dict[str, bool]) -> list[str]:
     feedback_dict = {
-        "minimum_length": "* A senha precisa ter no mínimo 16 caracteres",
+        "minimum_length": "* A senha precisa ter no mínimo 12 caracteres",
         "maximum_length": "* A senha precisa ter no máximo 128 caracteres",
         "has_lower_char": "* A senha precisa ter letras minúsculas",
         "has_upper_char": "* A senha precisa ter letras maiúsculas",
@@ -137,7 +137,11 @@ def main():  # pragma: no cover
         "wordlists_xors": wordlists_xors | False,
     }
 
-    password_checker_result(params)
+    evaluation = password_checker_result(params)
+
+    print("Avaliação: ")
+    for feedback in evaluation:
+        print(feedback)
 
 
 if __name__ == "__main__":  # pragma: no cover

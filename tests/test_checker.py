@@ -331,7 +331,7 @@ class TestChecker(unittest.TestCase):
             "wordlists_xors": True
         }
         result = password_checker_result(params)
-        self.assertEqual(result, ["* A senha precisa ter no mínimo 16 caracteres"])
+        self.assertEqual(result, ["* A senha precisa ter no mínimo 12 caracteres"])
         params = {
             "minimum_length": True,
             "maximum_length": False,
@@ -457,7 +457,7 @@ class TestChecker(unittest.TestCase):
         self.assertEqual(
             result,
             [
-                "* A senha precisa ter no mínimo 16 caracteres",
+                "* A senha precisa ter no mínimo 12 caracteres",
                 "* A senha precisa ter números",
                 "* A senha está em listas públicas de senhas conhecidas",
             ],
@@ -490,7 +490,7 @@ class TestChecker(unittest.TestCase):
         self.assertEqual(
             result, 
             [
-                "* A senha precisa ter no mínimo 16 caracteres",
+                "* A senha precisa ter no mínimo 12 caracteres",
                 "* A senha precisa ter no máximo 128 caracteres",
                 "* A senha precisa ter letras minúsculas",
                 "* A senha precisa ter letras maiúsculas",
