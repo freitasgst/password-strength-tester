@@ -457,11 +457,24 @@ class TestChecker(unittest.TestCase):
         self.assertEqual(
             result,
             [
-                "* A senha precisa ter no mínimo 8 caracteres",
+                "* A senha precisa ter no mínimo 16 caracteres",
                 "* A senha precisa ter números",
                 "* A senha está em listas públicas de senhas conhecidas",
             ],
         )
+        params = {
+            "minimum_length": True,
+            "maximum_length": True,
+            "has_lower_char": True,
+            "has_upper_char": True,
+            "has_digit_char": True,
+            "has_punct_char": True,
+            "has_rep_series": True,
+            "has_seq_series": True,
+            "wordlists_xors": True
+        }
+        result = password_checker_result(params)
+        self.assertEqual(result, ["A senha é forte!"])
         params = {
             "minimum_length": False,
             "maximum_length": False,
@@ -474,4 +487,17 @@ class TestChecker(unittest.TestCase):
             "wordlists_xors": False
         }
         result = password_checker_result(params)
-        self.assertEqual(result, ["A senha é forte!"])
+        self.assertEqual(
+            result, 
+            [
+                "* A senha precisa ter no mínimo 16 caracteres",
+                "* A senha precisa ter no máximo 128 caracteres",
+                "* A senha precisa ter letras minúsculas",
+                "* A senha precisa ter letras maiúsculas",
+                "* A senha precisa ter números",
+                "* A senha precisa ter caracteres especiais",
+                "* A senha não pode ter repetições sequenciais de um caracter",
+                "* A senha não pode conter uma sequência de caracteres",
+                "* A senha está em listas públicas de senhas conhecidas",
+            ]
+        )
