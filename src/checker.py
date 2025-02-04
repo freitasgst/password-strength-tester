@@ -1,54 +1,115 @@
+# True: a condição está ok
+# False: a condição não foi atingida
+
+
 def password_minimum_length(password: str) -> bool:
-    pass
+    if len(password) < 16:
+        return False
+    return True
 
 
 def password_maximum_length(password: str) -> bool:
-    pass
+    if len(password) >= 129:
+        return False
+    return True
 
 
 def password_has_lower_char(password: str) -> bool:
-    pass
+    lower = "abcdefghijklmnopqrstuvwxyz"
+
+    for char in password:
+        if char in lower:
+            return True
+    return False
 
 
 def password_has_upper_char(password: str) -> bool:
-    pass
+    upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+    for char in password:
+        if char in upper:
+            return True
+    return False
 
 
 def password_has_digit_char(password: str) -> bool:
-    pass
+    digit = "0123456789"
+
+    for char in password:
+        if char in digit:
+            return True
+    return False
 
 
 def password_has_punct_char(password: str) -> bool:
-    pass
+    # raw string
+    punct = r"""!@#$%^&*()-_=+[]{}|\;:'",.<>?/`~"""
+
+    for char in password:
+        if char in punct:
+            return True
+    return False
 
 
 def password_has_rep_series(password: str) -> bool:
-    pass
+    rep_number = 3
+
+    for i in range(len(password) - rep_number):
+        rep = password[i:i + rep_number]
+        rep_letters = set(rep)
+        if len(rep_letters) == 1:
+            return False
+    return True
 
 
 def password_has_seq_series(password: str) -> bool:
-    pass
+    allchars = "abcdefghijklmnopqrstuvwxyz"
+    numerals = "0123456789"
+    seq_number = 3
+
+    password = password.lower()
+
+    for i in range(len(password) - seq_number):
+        chunck = password[i:i+seq_number]
+        if chunck in allchars or chunck in numerals:
+            return False
+    return True
 
 
 def password_wordlists_xors(password: str) -> bool:
-    # with open('assets/worldlists/rockyou.txt') as file:
-    #     known_passwords = [leak.split() for leak in file]
-    pass
+    with open("assets/worldlists/rockyou-1.txt") as file:
+        known_passwords_1 = [leak.split() for leak in file]
+    with open("assets/worldlists/rockyou-2.txt") as file:
+        known_passwords_2 = [leak.split() for leak in file]
+    known_passwords = known_passwords_1 + known_passwords_2
+
+    if [password] in known_passwords:
+        return False
+    return True
 
 
 def password_checker_result(fails: dict[str, bool]) -> list[str]:
-    feedback = {
+    feedback_dict = {
         "minimum_length": "* A senha precisa ter no mínimo 16 caracteres",
         "maximum_length": "* A senha precisa ter no máximo 128 caracteres",
         "has_lower_char": "* A senha precisa ter letras minúsculas",
         "has_upper_char": "* A senha precisa ter letras maiúsculas",
         "has_digit_char": "* A senha precisa ter números",
         "has_punct_char": "* A senha precisa ter caracteres especiais",
-        "has_rep_series": "* A senha não pode conter repetição de um caracter em sequência",
+        "has_rep_series": "* A senha não pode ter repetições sequenciais de um caracter",
         "has_seq_series": "* A senha não pode conter uma sequência de caracteres",
-        "wordlists_xors": "* A senha está em listas públicas de senhas conhecidas"
+        "wordlists_xors": "* A senha está em listas públicas de senhas conhecidas",
     }
-    pass
+    feedback_list = []
+
+    if all(fails.values()):
+        return ["A senha é forte!"]
+    else:
+        for fail, value in fails.items():
+            if not value:
+                warning = feedback_dict.get(fail)
+                feedback_list.append(warning)
+        return feedback_list
 
 
 def main():  # pragma: no cover
@@ -66,15 +127,15 @@ def main():  # pragma: no cover
     wordlists_xors = password_wordlists_xors(password)
 
     params = {
-        "minimum_length": minimum_length | True,
-        "maximum_length": maximum_length | True,
-        "has_lower_char": has_lower_char | True,
-        "has_upper_char": has_upper_char | True,
-        "has_digit_char": has_digit_char | True,
-        "has_punct_char": has_punct_char | True,
-        "has_rep_series": has_rep_series | True,
-        "has_seq_series": has_seq_series | True,
-        "wordlists_xors": wordlists_xors | True 
+        "minimum_length": minimum_length | False,
+        "maximum_length": maximum_length | False,
+        "has_lower_char": has_lower_char | False,
+        "has_upper_char": has_upper_char | False,
+        "has_digit_char": has_digit_char | False,
+        "has_punct_char": has_punct_char | False,
+        "has_rep_series": has_rep_series | False,
+        "has_seq_series": has_seq_series | False,
+        "wordlists_xors": wordlists_xors | False,
     }
 
     password_checker_result(params)
