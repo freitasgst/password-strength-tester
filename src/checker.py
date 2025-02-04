@@ -1,5 +1,4 @@
-# True: a condição está ok
-# False: a condição não foi atingida
+import getpass
 
 
 def password_minimum_length(password: str) -> bool:
@@ -114,7 +113,7 @@ def password_checker_result(fails: dict[str, bool]) -> list[str]:
 
 
 def main():  # pragma: no cover
-    password = input("Digite a senha: ")
+    password = getpass.getpass("Digite a senha: ", stream=None)
 
     minimum_length = password_minimum_length(password)
     maximum_length = password_maximum_length(password)
