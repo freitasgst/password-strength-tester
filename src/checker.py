@@ -77,13 +77,14 @@ def password_has_seq_series(password: str) -> bool:
 
 
 def password_wordlists_xors(password: str) -> bool:
-    with open("assets/worldlists/rockyou-1.txt") as file:
-        known_passwords_1 = [leak.split() for leak in file]
-    with open("assets/worldlists/rockyou-2.txt") as file:
-        known_passwords_2 = [leak.split() for leak in file]
+    known_passwords = []
+    with open("assets/worldlists/rockyou-1.txt", "r", encoding="utf-8") as file:
+        known_passwords_1 = file.read().splitlines()
+    with open("assets/worldlists/rockyou-2.txt", "r", encoding="utf-8") as file:
+        known_passwords_2 = file.read().splitlines()
     known_passwords = known_passwords_1 + known_passwords_2
 
-    if [password] in known_passwords:
+    if password in known_passwords:
         return False
     return True
 
@@ -115,7 +116,6 @@ def password_checker_result(fails: dict[str, bool]) -> list[str]:
 def main():  # pragma: no cover
     password = input("Digite a senha: ")
 
-    minimum_length = password_minimum_length(password)
     minimum_length = password_minimum_length(password)
     maximum_length = password_maximum_length(password)
     has_lower_char = password_has_lower_char(password)
